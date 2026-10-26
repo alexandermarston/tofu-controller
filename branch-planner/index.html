@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -27,10 +27,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -446,6 +446,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#base-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base branch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#replan-commands" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -609,6 +620,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#base-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base branch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#replan-commands" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -641,10 +663,13 @@
 
 <h1 id="branch-planner-overview">Branch Planner Overview</h1>
 <p>The GitOps methodology streamlines infrastructure provisioning and management, using Git as the source of truth. The Branch Planner, a component of TF-Controller, aims to take this a step further by allowing developers and operations teams to plan Terraform configurations on a branch that's separate from the <code>main</code> branch. This makes it easier to review and understand the potential impact of your changes before you run <code>terraform apply</code>.</p>
-<p>The Branch Planner's most important feature is its seamless integration with the PR (Pull Request) user interface. When enabled through Helm values, it watches repositories that contain Terraform resources at regular intervals—checking their referenced Source, and polling for Pull Requests using GitHub's API and the provided token. When changes are proposed on a new branch, Branch Planner runs a plan in the cluster and displays the results directly as comments on your PR. Once you're satisfied with the results, you can merge your branch into the <code>main</code> branch to trigger the TF-Controller to reconcile the updated code.</p>
+<p>The Branch Planner's most important feature is its seamless integration with the Pull Request / Merge Request user interface. When enabled through Helm values, it watches repositories that contain Terraform resources at regular intervals—checking their referenced Source, and polling for Pull Requests (GitHub) or Merge Requests (GitLab) using the provider's API and the provided token. When changes are proposed on a new branch, Branch Planner runs a plan in the cluster and displays the results directly as comments on your PR/MR. Once you're satisfied with the results, you can merge your branch into the <code>main</code> branch to trigger the TF-Controller to reconcile the updated code.</p>
+<p>Branch Planner supports <strong>GitHub</strong> (including GitHub Enterprise), <strong>GitLab</strong> (including self-hosted), <strong>Bitbucket Cloud</strong>, <strong>Bitbucket Server</strong>, <strong>Gitea</strong>, and <strong>Azure DevOps</strong> (experimental). The provider is automatically detected from the GitRepository source URL.</p>
 <p><img alt="branch planner" src="branch-planner.png" /></p>
+<h3 id="base-branch">Base branch</h3>
+<p>Only Pull Requests whose base branch matches the branch tracked by the Terraform object's source (<code>.spec.ref.branch</code>, or <code>.spec.ref.name</code> of the form <code>refs/heads/&lt;branch&gt;</code>) are planned. Set <code>spec.branchPlanner.baseBranch</code> to override this. Sources that track a tag, semver range or commit need the override, otherwise no Pull Requests are planned.</p>
 <h3 id="replan-commands">Replan commands</h3>
-<p>The Branch Planner also allows users to manually trigger the replan process. By simply commenting <code>!replan</code> under the PR, the Branch Planner will be instructed to generate a new plan and post it under the PR as a new comment.</p>
+<p>The Branch Planner also allows users to manually trigger the replan process. By simply commenting <code>!replan</code> under the PR or MR, the Branch Planner will be instructed to generate a new plan and post it under the PR/MR as a new comment.</p>
 <p>Now that you know what Branch Planner can do for you, follow the <a href="branch-planner-getting-started/">guide to get started</a>.</p>
 
 
@@ -695,10 +720,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.annotate", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.annotate", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>
